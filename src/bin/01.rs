@@ -54,13 +54,13 @@ pub fn part_two(input: &str) -> Option<u64> {
         let direction = &line[0..1];
         let mut delta = line[1..].parse::<i32>().unwrap();
 
-        // get the number of times this delta divides by zero as we will pass zero at least this many times
-        // also get the remainder when divided by zero as this will affect our ending dial position
+        // get the number of times this delta divides by 100 as we will pass zero at least this many times
+        // also get the remainder when divided by 100 as this will affect our ending dial position
         let res = (delta / 100, delta % 100);
         passed_zero_count += res.0;
 
         if direction == "L"{
-            // if we are going left, and our end dial count will be less than zero, we will have passes zero.
+            // if we are going left, and our end dial count will be less than zero, we will have passed zero.
             // do not change the zero count if the total count is zero, as we have already dealt with that
             if dial_count != 0 && dial_count - res.1 <= 0{
                 passed_zero_count += 1;
@@ -69,7 +69,7 @@ pub fn part_two(input: &str) -> Option<u64> {
             delta *= -1;
         }
         else {
-            // if we are going right, and our end dial count will be more than zero, we will pass zero.
+            // if we are going right, and our end dial count will be more than 100, we will pass zero.
             if dial_count + res.1 >= 100{
                 passed_zero_count += 1;
             }
